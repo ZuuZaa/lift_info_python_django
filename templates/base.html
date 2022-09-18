@@ -1,0 +1,98 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'front/css/styles.min.css' %}">
+</head>
+
+<body>
+
+    {% block content %}{% endblock %}
+
+
+    <script src="{% static 'front/js/main.min.js' %}"></script>
+    <script>
+        function openTeam(evt, TabNumber) {
+
+
+            var i, tabcontent, tablinks, tabarrow;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("d-links");
+            tabarrow = document.getElementsByClassName('tab-arrow')
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                tabarrow[i].className = tabarrow[i].className.replace(" visible-arrow", "")
+            }
+            document.getElementById(TabNumber).style.display = "block";
+            evt.currentTarget.className += " active";
+            var tab = evt.currentTarget;
+            var s1 = tab.children[0]
+            var s2 = s1.children[2]
+            s2.className += " visible-arrow"
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+
+    <script>
+        /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+        function mobileDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+            // document.getElementsByClassName('blur-section').classList.add("blur");
+            var blur = document.querySelectorAll(".blur-section");
+            blur.forEach(function (test) {
+                test.classList.add("blur")
+            })
+
+            document.getElementById('footer').classList.add("blur");
+
+            $('.mdi-menu').hide()
+            $('.m-close').show()
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (e) {
+            if (!e.target.matches('.m-dropdown-btn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
+    
+    {% if successful_submit %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.querySelector("#contact-modal").style.display = "flex";
+            document.querySelector('body').style.overflow = "hidden";
+        });
+    </script>
+    {% endif %}
+
+    {% if successful_submit %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.querySelector("#mobile-modal").style.display = "flex";
+            document.querySelector('body').style.overflow = "hidden";
+        });
+    </script>
+    {% endif %}
+
+</body>
+
+</html>

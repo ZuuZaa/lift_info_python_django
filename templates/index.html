@@ -1,0 +1,635 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+
+<!--============================================== Modal CONTACT =================================================-->
+<div class="modal-bg contact-m" id="contact-modal">
+    <div class="modal-content">
+        <a href="{% url 'home' %}" class="mdi mdi-close close-btn"></a>
+        <div class="content-wrapper">
+            <span class="mdi mdi-check"></span>
+            <h1>{% trans 'Müraciətiniz uğurla göndərildi' %}</h1>
+            <p>{% trans '“Lifftəmir” İstehsalat Birliyinə müraciət etdiyiniz üçün təşəkkür edirik. Sorğunuz uyğun şöbə tərəfindən emal olunacaq və müraciətinizə əsasən yaranan vəziyyətin dəqiqləşdirilməsi və həll olunması məqsədilə zərurət olduğu halda əməkdaşlarımız sizinlə əlaqə saxlayacaq.' %}
+            </p>
+        </div>
+    </div>
+</div>
+<!--============================================== Modal CONTACT END=================================================-->
+
+
+<!--============================================== Header =================================================-->
+
+<header>
+    <div class="wrapper ">
+        <div class="header-wrapper ">
+            <div class="header-holder ">
+                <div class="header-right-side ">
+                    <div class="header-right-side-logo-wrapper ">
+                        <a href="{% url 'home' %}"> <img src="{% static 'front/images/bitmap@3x.png' %}"
+                                alt="gerb "></a>
+                    </div>
+                    <div class="header-right-side-name ">
+                        <a href="{% url 'home' %}">
+                            <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}<br>
+                                {% trans '“Lifttəmir” İstehsalat Birliyi' %}</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="header-navigation ">
+                    <ul>
+                        <li>
+                            <a href="#about-section" class="nav-links">{% trans 'Haqqımızda' %}</a>
+                        </li>
+                        <li>
+                            <a href="#structure-section" class="nav-links">{% trans 'Struktur' %}</a>
+                        </li>
+                        <li>
+                            <a href="#news-section" class="nav-links">{% trans 'Xəbərlər' %}</a>
+                        </li>
+                        <li>
+                            <a href="#contact-section" class="nav-links">{% trans 'Əlaqə' %}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header-left-side ">
+                    <div class="search-and-lang ">
+                        <div class="lang ">
+                            <div id="myDD">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {{LANGUAGE_CODE | upper}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% for language in languages %}
+                                    <li>
+                                        <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                                            class="nav-link {% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                                            lang="{{ language.code }}">
+                                            {{ language.code|upper }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="online-payment ">
+                        <a href="#contact-section" class="online-payment-btn">{% trans 'Elektron müraciət' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--============================================== Header END=================================================-->
+
+<!--============================================== Mobile Header =================================================-->
+<section class="mobile-header">
+    <div class="m-header-wrapper">
+        <div class="m-logo-holder">
+            <div class="m-logo-holder-img ">
+                <a href="{% url 'home' %}"> <img src="{% static 'front/images/bitmap@3x.png' %}" alt="gerb "></a>
+            </div>
+            <div class="m-logo-holder-text ">
+                <a href="{% url 'home' %}">
+                    <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}<br>
+                        {% trans '“Lifttəmir” İstehsalat Birliyi' %}</p>
+                </a>
+            </div>
+        </div>
+        <div class="m-dropdown">
+            <button class="m-dropdown-btn mdi mdi-menu" onclick="mobileDropdown()"></button>
+            <button class="m-dropdown-btn mdi mdi-close m-close"></button>
+
+            <div class="m-dropdown-content" id="myDropdown">
+                <ul class="m-ul-first">
+                    <li><a href="#about-section">{% trans 'Haqqımızda' %}</a></li>
+                    <li><a href="#structure-section">{% trans 'Struktur' %}</a></li>
+                    <li><a href="#news-section">{% trans 'Xəbərlər' %}</a></li>
+                    <li><a href="{% url 'form' %}">{% trans 'Əlaqə' %}</a></li>
+                    <li class="li-btn"><a href="{% url 'form' %}" class="m-form-btn">{% trans 'Elektron müraciət' %}</a>
+                    </li>
+                    <li>
+                        <ul class="m-ul-second">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <li>
+                                <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                                    class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                                    lang="{{ language.code }}">
+                                    {{ language.code|upper }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--============================================== Mobile Header END =================================================-->
+
+
+<main class="blur-section index-main">
+    <!--============================================== About section =================================================-->
+
+    <section class="about" id="about-section">
+        <div class="wrapper">
+            <div class="about-wrapper">
+                <div class="about-content">
+                    <div class="about-content-inner">
+                        <h1>{% trans 'Haqqımızda' %}</h1>
+                        <p class="about-p">{{about.description | safe}}</p>
+                        <a href="{% url 'about' %}" id="openModal" class="see-more" style="padding-left:0">
+                            <span class="see-more-btn">{% trans 'Ətraflı' %}</span>
+                            <span class="mdi mdi-chevron-right right-arrow about-arrow"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-img">
+                    <img src="{% static 'front/images/baku-illustration@3x.png' %}" alt="baku">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--============================================== About section END=================================================-->
+
+
+    <!--============================================== Structure section =================================================-->
+
+    <section class="structure" id="structure-section">
+        <div class="wrapper">
+            <div class="structure-wrapper">
+                <h1>{% trans 'Struktur' %}</h1>
+
+                <!--======================== Tabs menu Desktop ============================-->
+                <div class="structure-content" id="tabs-desktop">
+                    <div class="tabs">
+                        {% for department in department_list %}
+                        <button class="tablinks d-links" onclick="openTeam(event, 'tab{{department.id}}')"
+                            id="defaultOpen">
+                            <span class="btn-content">
+                                <span class="btn-content-1">{{department.name}}</span>
+                                <span class="btn-content-2">{{department.address}}</span>
+                                <span class=" mdi mdi-chevron-right tab-arrow"></span>
+                            </span>
+                        </button>
+                        {% endfor %}
+                    </div>
+                    {% for department in department_list %}
+                    <div class="tabcontent" id="tab{{department.id}}">
+                        {% for staff in department.staff_set.all %}
+                        <div class="tabcontent-row">
+                            <div class="tabcontent-row-details">
+                                <ul>
+                                    <li>{{staff.role}}</li>
+                                    <li class="mobile-hidden-li">{% trans 'Əlaqə nömrəsi' %}</li>
+                                    <li class="mobile-hidden-li">{% trans 'E-poçt ünvanı' %}</li>
+                                </ul>
+                            </div>
+                            <div class="tabcontent-row-person">
+                                <ul>
+                                    <li>{{staff.full_name}}</li>
+                                    <li><span class="mdi mdi-phone m-icon"></span><a
+                                            href="callto:{{staff.tel}}">{{staff.phone_number}}</a></li>
+                                    <li><span class="mdi mdi-email-outline m-icon"></span>
+                                        <a href="mailto:{{staff.email}}">{{staff.email}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% if not forloop.last %}
+                        <hr class="breakpoint">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <!--======================== Tabs menu Desktop END ============================-->
+
+                <!--======================== Accordion menu Mobile ============================-->
+                <div class="structure-content" id="tabs-mobile">
+                    <div class="tabs accordion">
+                        <!-- accordion section -->
+                        <div class="tab-container">
+                            {% for department in department_list %}
+                            <button class="tablinks" id="accordionhead_{{department.id}}">
+                                <span class="btn-content">
+                                    <span class="btn-content-1">{{department.name}}</span>
+                                    <span class="btn-content-2">{{department.address}}</span>
+                                </span>
+                                <span class=" mdi mdi-chevron-down acc-icon"></span>
+                            </button>
+                            <div class="tabcontent acc-content" id="accordioncontent_{{department.id}}">
+                                {% for staff in department.staff_set.all %}
+                                <div class="tabcontent-row">
+                                    <div class="tabcontent-row-details">
+                                        <ul>
+                                            <li>{{staff.role}}</li>
+                                            <li class="mobile-hidden-li">{% trans 'Əlaqə nömrəsi' %}</li>
+                                            <li class="mobile-hidden-li">{% trans 'E-poçt ünvanı' %}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tabcontent-row-person">
+                                        <ul>
+                                            <li>{{staff.full_name}}</li>
+                                            <li><span class="mdi mdi-phone m-icon"></span><a
+                                                    href="callto:{{staff.tel}}">{{staff.phone_number}}</a></li>
+                                            <li><span class="mdi mdi-email-outline m-icon"></span>
+                                                <a href="mailto:{{staff.email}}">{{staff.email}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr class="breakpoint">
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!--======================== Accordion menu Mobile END ============================-->
+            </div>
+        </div>
+    </section>
+    <!--============================================== Structure section END=================================================-->
+
+
+    <!--============================================== News section =================================================-->
+
+    <section class="news" id="news-section">
+        <div class="wrapper">
+            <div class="news-wrapper">
+                <h1>{% trans 'Xəbərlər' %}</h1>
+                <div class="news-flex">
+                    {% for news in news_list %}
+                    {% if  forloop.counter == 3 %}
+                    <div class="news-cards">
+                        <div class="card-container">
+                            <a href="{% url 'news_detail' news.slug %}">
+                                <div class="news-card-top">
+                                    <p class="truncate-overflow">{{news.title}}</p>
+                                </div>
+                            </a>
+                            <div class="news-card-bottom">
+                                <p>{{news.published | date:'d.m.Y'}}</p>
+                                <a href="{% url 'news_detail' news.slug %}" class=" mdi mdi-chevron-right "></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif forloop.counter == 6 %}
+                    <div class="news-cards third">
+                        <div class="card-container">
+                            <a href="{% url 'news_detail' news.slug %}">
+                                <div class="news-card-top">
+                                    <p class="truncate-overflow">{{news.title}}</p>
+                                </div>
+                            </a>
+                            <div class="news-card-bottom">
+                                <p>{{news.published | date:'d.m.Y'}}</p>
+                                <a href="{% url 'news_detail' news.slug %}" class=" mdi mdi-chevron-right "></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="news-cards">
+                        <div class="card-container">
+                            <a href="{% url 'news_detail' news.slug %}">
+                                <div class="news-card-top">
+                                    <p class="truncate-overflow">{{news.title}}</p>
+                                </div>
+                            </a>
+                            <div class="news-card-bottom">
+                                <p>{{news.published | date:'d.m.Y'}}</p>
+                                <a href="{% url 'news_detail' news.slug %}" class=" mdi mdi-chevron-right "></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="news-cards last-news">
+                        <div class="card-container last-card">
+                            <a href="{% url 'news_list' %}?page=1">
+                                <p>{% trans 'Digər xəbərlər' %} </p><span class="mdi mdi-chevron-right "></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--============================================== News section END=================================================-->
+
+    <!--============================================== Form section =================================================-->
+
+    <section class="contacts" id="contact-section">
+        <div class="wrapper">
+            <div class="contacts-wrapper">
+                <h1>{% trans 'Elektron müraciət forması' %}</h1>
+                <div class="contacts-form-container">
+                    <div class="contacts-form-container-holder">
+                        <form method="POST" name="contact-form" id="form-validation">
+                            {% csrf_token %}
+                            <div class="f-row">
+                                <div class="form-content">
+                                    <p>{% trans 'Müraciətinin növünü seçin' %}</p>
+                                </div>
+                                <div class="form-input">
+                                    <ul>
+                                        <li id="radiobutton-li"><input type="radio" name="type" id="complaint"
+                                                value="şikayət" required
+                                                data-valueMissing="*{% trans 'Müraciət növü mütləq seçilməlidir' %}">
+                                            <label for="complaint" class="r-button">{% trans 'Şikayət' %}</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="type" id="suggestion" value="təklif">
+                                            <label for="suggestion" class="r-button">{% trans 'Təklif' %}f</label>
+                                        </li>
+                                        <li> <input type="radio" name="type" id="petition" value="ərizə">
+                                            <label for="petition" class="petition-label">{% trans 'Ərizə' %}</label>
+                                        </li>
+                                    </ul>
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj" id="radio-error">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{% trans 'Müraciət növü mütləq seçilməlidir' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END -->
+                                </div>
+                            </div>
+                            <div class="f-row">
+                                <div class="form-content">
+                                    <label
+                                        for="structure">{% trans 'Müraciətinizin aid olduğu struktur vahidini seçin' %}</label>
+                                </div>
+                                <div class="form-input2" id="structureselect">
+                                    <i class="mdi mdi-chevron-down"></i>
+                                    <select id="structure" name="structure" required
+                                        data-valueMissing="*{% trans 'Struktur vahidi mütləq seçilməlidir' %}">
+                                        <option value=""></option>
+                                        {% for department in department_list %}
+                                        <option value='{{department.name}}'>{{department.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj" id="structure-error">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{% trans 'Struktur vahidi mütləq seçilməlidir' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END -->
+                                </div>
+                            </div>
+                            <div class="f-row">
+                                <div class="form-content">
+                                    <label for="theme">{% trans 'Müraciətinizin mövzusunu seçin' %}</label>
+                                </div>
+                                <div class="form-input2" id="themeoftherequest">
+                                    <i class="mdi mdi-chevron-down"></i>
+                                    <select id="theme" name="theme" required data-validation="required"
+                                        data-valueMissing="*{%  trans 'Müraciət mövzusu mütləq seçilməlidir' %}">
+                                        <option value=""></option>
+                                        {% for subject in application_subjects %}
+                                        <option value='{{subject.name_az}}'>{{subject.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj" id="theme-error">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{%  trans 'Müraciət mövzusu mütləq seçilməlidir' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END -->
+                                </div>
+                            </div>
+                            <div class="f-row">
+                                <div class="form-content">
+                                    <label for="fname" class="t-input-label">{% trans 'Adınız' %}</label><br>
+                                    <input type="text" id="fname" name="fname"
+                                        placeholder="{% trans 'Adınızı daxil edin' %}" required
+                                        data-validation="required"
+                                        data-valueMissing="*{% trans 'Adınızı düzgün qeyd edin' %}">
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj err-centered" id="err-name">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text" id="geeks-name">{% trans 'Adınızı düzgün qeyd edin' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END-->
+                                </div>
+
+                                <div class="form-input2">
+                                    <label for="fsurname"
+                                        class="t-input-label right-label">{% trans 'Soyadınız' %}</label><br>
+                                    <input type="text" id="fsurname" name="fsurname"
+                                        placeholder="{% trans 'Soyadınızı daxil edin' %}" required
+                                        data-validation="required"
+                                        data-valueMissing="*{% trans 'Soyadınızı  düzgün qeyd edin' %}">
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj err-centered" id="error-surname">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{% trans 'Soyadınızı düzgün qeyd edin' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END-->
+                                </div>
+                            </div>
+
+                            <div class="f-row">
+                                <div class="form-content">
+                                    <label for="femail"
+                                        class="t-input-label">{% trans 'Elektron poçt ünvanınız' %}</label><br>
+                                    <input type="email" id="femail" name="email"
+                                        placeholder="{% trans 'E-poçt ünvanınızı daxil edin' %}" required
+                                        data-validation="required"
+                                        data-valueMissing="*{% trans 'E-poçt ünvanınızı  düzgün qeyd edin' %}">
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj err-centered" id="error-email">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{% trans 'E-poçt ünvanınızı düzgün qeyd edin' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END-->
+                                </div>
+
+                                <div class="form-input2 number-r">
+                                    <i class="mdi mdi-chevron-down number-icon"></i>
+                                    <label for="fnumber"
+                                        class="t-input-label right-label">{% trans 'Əlaqə nömrəniz' %}</label><br>
+                                    <input type="number" placeholder="+994" class="country-code" disabled>
+                                    <select name="prefix" id="operator" class="operator" required
+                                        data-validation="required"
+                                        data-valueMissing="*{% trans 'Mobil operator mütləq seçilməlidir' %}">
+                                        <option value=""></option>
+                                        <option value="50">50</option>
+                                        <option value="51">51</option>
+                                        <option value="55">55</option>
+                                        <option value="99">99</option>
+                                        <option value="70">70</option>
+                                        <option value="77">77</option>
+                                    </select>
+                                    <input type="number" id="fnumber" name="fnumber"
+                                        placeholder="{% trans 'Nömrənizi daxil edin' %}" required="required"
+                                        data-validation="required"
+                                        data-valueMissing="*{% trans 'Əlaqə nömrənizi düzgün qeyd edin' %}"
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        minlength="7" maxlength="7">
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj err-centered" id="error-number">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">{% trans 'Əlaqə nömrənizi düzgün qeyd edin' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END-->
+                                </div>
+                            </div>
+
+                            <div class="f-row text-area">
+                                <div class="form-input" id="textarea-text">
+                                    <label for="fmsj"
+                                        class="t-input-label">{% trans 'Müraciətinizin tam mətni' %}</label><br>
+                                    <textarea name="fmsj" id="fmsj" cols="68" rows="10"
+                                        placeholder="{% trans 'Müraciətinizin məzmununu daxil edin' %}" required
+                                        data-valueMissing="*{% trans 'Müraciətinizi tam şəkildə daxil edin' %}"></textarea>
+                                    <!-- ERROR MESSAGE -->
+                                    <div class="form-content error-msj">
+                                        <span class="error-star mdi mdi-asterisk"></span>
+                                        <p class="error-text">*{% trans 'Müraciətinizi tam şəkildə daxil edin' %}</p>
+                                    </div>
+                                    <!-- ERROR MESSAGE END-->
+                                </div>
+                            </div>
+
+                            <div class="form-submit">
+                                <div class="form-content form-submit1">
+                                    <p>{% trans 'Davam etmək üçün təsdiqləyin' %}</p>
+                                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                                    <div class="g-recaptcha" data-sitekey="6Ldhae8UAAAAABD8Ih3YAI9uh-v7F7WbFL-pNIDj">
+                                    </div>
+                                </div>
+                                <div class="form-submit2">
+                                    <button type='submit' class="online-payment-btn"
+                                        id="send-btn">{% trans 'Göndər' %}</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--============================================== Form section END=================================================-->
+
+</main>
+
+
+<a href="{% url 'form' %}" id="button"><i class="mdi mdi-square-edit-outline"></i></a>
+
+
+<!--============================================== Footer=================================================-->
+
+<footer id="footer">
+    <div class="sites">
+        <div class="wrapper">
+            <div class="sites-wrapper">
+                <ul>
+                    {% for link in footer_links %}
+                    <li>
+                        <a href="{{link.link_url}}">{{link.link_name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-footer">
+        <div class="wrapper">
+            <div class="main-footer-1">
+                <div class="footer-logo-holder">
+                    <div class="footer-logo-wrapper ">
+                        <a href="{% url 'home' %}"><img src="{% static 'front/images/bitmap@3x.png' %}" alt="gerb "></a>
+                    </div>
+                    <div class="footer-logo-name ">
+                        <a href="{% url 'home' %}">
+                            <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}
+                                <br>{% trans '“Lifttəmir” İstehsalat Birliyi' %} </p>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-nav ">
+                    <div class="map-of-the-site">
+                        <ul>
+                            <li class="footer-header">{% trans 'Saytın xəritəsi' %}</li>
+                            <li>
+                                <a href="#about-section">{% trans 'Haqqımızda' %}</a>
+                            </li>
+                            <li>
+                                <a href="#structure-section">{% trans 'Struktur' %}</a>
+                            </li>
+                            <li>
+                                <a href="#news-section">{% trans 'Xəbərlər' %}</a>
+                            </li>
+                            <li>
+                                <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                                <div class="footer-btn " id="hidden-link" name="{% url 'form' %}"
+                                    title="#contact-section">
+                                    <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                                    <a href="#contact-section" class="footer-c">{% trans 'Əlaqə' %}</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact">
+                        <ul>
+                            <li class="footer-header">{% trans 'Əlaqə nömrəsi' %}</li>
+                            <li>
+                                <a href="tel:{{contact.tel_1}}">{{contact.phone_number_1}}</a>
+                            </li>
+                            <li>
+                                <a href="tel:{{contact.tel_2}}">{{contact.phone_number_2}}</a>
+                            </li>
+                            <li class="footer-header fax-h">{% trans 'Faks' %}</li>
+                            <li><a href="fax:{{contact.fax}}">{{contact.fax_number}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="adress">
+                        <ul>
+                            <li class="footer-header">{% trans 'Ünvan' %}</li>
+                            <li>
+
+                                <a href="{{contact.address_map_link}}" target="blank">{{contact.address | safe}}</a>
+                            </li>
+                            <li class="footer-header email-h">{% trans 'Elektron ünvan' %}</li>
+                            <li>
+                                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                <div class="footer-btn " id="hidden-link" name="{% url 'form' %}" title="#contact-section">
+                    <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                    <a href="#contact-section" class="online-payment-btn footer-c">{% trans 'Elektron müraciət' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border"></div>
+    <div class="main-footer-2 ">
+        <div class="wrapper">
+            <p>2017-2020 © {% trans 'Bütün Hüquqlar Qorunur' %}</p>
+        </div>
+    </div>
+</footer>
+
+<!--============================================== Footer END=================================================-->
+
+
+{% endblock %}

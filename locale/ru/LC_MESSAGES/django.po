@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-25 12:21+0400\n"
+"PO-Revision-Date: 2020-04-21 10:32+0319\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: Lift/settings.py:144
+msgid "Azerbaijanian"
+msgstr ""
+
+#: Lift/settings.py:145
+msgid "Russian"
+msgstr ""
+
+#: Lift/settings.py:146
+msgid "English"
+msgstr ""
+
+#: templates/about.html:18 templates/about.html:109 templates/index.html:38
+#: templates/index.html:455 templates/news_detail.html:20
+#: templates/news_detail.html:150 templates/news_list.html:18
+#: templates/news_list.html:139
+msgid "Bakı Şəhər İcra Hakimiyyəti"
+msgstr ""
+
+#: templates/about.html:19 templates/about.html:110 templates/index.html:39
+#: templates/index.html:456 templates/news_detail.html:21
+#: templates/news_detail.html:151 templates/news_list.html:19
+#: templates/news_list.html:140
+msgid "“Lifttəmir” İstehsalat Birliyi"
+msgstr ""
+
+#: templates/about.html:25 templates/about.html:76 templates/about.html:118
+#: templates/index.html:46 templates/index.html:102 templates/index.html:464
+#: templates/news_detail.html:28 templates/news_detail.html:159
+#: templates/news_list.html:26 templates/news_list.html:148
+msgid "Haqqımızda"
+msgstr "О нас"
+
+#: templates/about.html:28 templates/about.html:121 templates/index.html:49
+#: templates/index.html:124 templates/index.html:467
+#: templates/news_detail.html:31 templates/news_detail.html:162
+#: templates/news_list.html:29 templates/news_list.html:151
+msgid "Struktur"
+msgstr ""
+
+#: templates/about.html:31 templates/about.html:124 templates/index.html:52
+#: templates/index.html:175 templates/index.html:470
+#: templates/news_detail.html:34 templates/news_detail.html:91
+#: templates/news_detail.html:165 templates/news_list.html:32
+#: templates/news_list.html:76 templates/news_list.html:154
+msgid "Xəbərlər"
+msgstr "Новости"
+
+#: templates/about.html:34 templates/about.html:127 templates/index.html:55
+#: templates/index.html:473 templates/news_detail.html:37
+#: templates/news_detail.html:168 templates/news_list.html:35
+#: templates/news_list.html:157
+msgid "Əlaqə"
+msgstr ""
+
+#: templates/about.html:63 templates/about.html:159 templates/index.html:84
+#: templates/index.html:505 templates/news_detail.html:66
+#: templates/news_detail.html:200 templates/news_list.html:64
+#: templates/news_list.html:189
+msgid "Elektron müraciət"
+msgstr ""
+
+#: templates/about.html:116 templates/index.html:462
+#: templates/news_detail.html:157 templates/news_list.html:146
+msgid "Saytın xəritəsi"
+msgstr "Карта сайта"
+
+#: templates/about.html:133 templates/index.html:144 templates/index.html:479
+#: templates/news_detail.html:174 templates/news_list.html:163
+msgid "Əlaqə nömrəsi"
+msgstr ""
+
+#: templates/about.html:140 templates/index.html:486
+#: templates/news_detail.html:181 templates/news_list.html:170
+msgid "Faks"
+msgstr ""
+
+#: templates/about.html:146 templates/index.html:492
+#: templates/news_detail.html:187 templates/news_list.html:176
+msgid "Ünvan"
+msgstr ""
+
+#: templates/about.html:151 templates/index.html:497
+#: templates/news_detail.html:192 templates/news_list.html:181
+msgid "Elektron ünvan"
+msgstr ""
+
+#: templates/about.html:168 templates/index.html:514
+#: templates/news_detail.html:209 templates/news_list.html:198
+msgid "Bütün Hüquqlar Qorunur"
+msgstr ""
+
+#: templates/index.html:14
+msgid "Müraciətiniz uğurla göndərildi"
+msgstr ""
+
+#: templates/index.html:105
+msgid "Ətraflı"
+msgstr "Подробнее"
+
+#: templates/index.html:145
+msgid "E-poçt ünvanı"
+msgstr ""
+
+#: templates/index.html:219
+#, fuzzy
+#| msgid "Xəbərlər"
+msgid "Digər xəbərlər"
+msgstr "Новости"
+
+#: templates/index.html:234
+msgid "Elektron müraciət forması"
+msgstr ""
+
+#: templates/index.html:243
+msgid "Müraciətinin növünü seçin"
+msgstr ""
+
+#: templates/index.html:249 templates/index.html:263
+msgid "Müraciət növü mütləq seçilməlidir"
+msgstr ""
+
+#: templates/index.html:250
+msgid "Şikayət"
+msgstr "жалоба"
+
+#: templates/index.html:254
+msgid "Təklif"
+msgstr ""
+
+#: templates/index.html:257
+msgid "Ərizə"
+msgstr ""
+
+#: templates/index.html:272
+msgid "Müraciətinizin aid olduğu struktur vahidini seçin"
+msgstr ""
+
+#: templates/index.html:277 templates/index.html:286
+msgid "Struktur vahidi mütləq seçilməlidir"
+msgstr ""
+
+#: templates/index.html:294
+msgid "Müraciətinizin mövzusunu seçin"
+msgstr ""
+
+#: templates/index.html:299 templates/index.html:308
+msgid "Müraciət mövzusu mütləq seçilməlidir"
+msgstr ""
+
+#: templates/index.html:316
+msgid "Adınız"
+msgstr ""
+
+#: templates/index.html:318
+msgid "Adınızı daxil edin"
+msgstr "Введите ваше имя"
+
+#: templates/index.html:320 templates/index.html:324
+msgid "Adınızı düzgün qeyd edin"
+msgstr "Введите свое имя правильно"
+
+#: templates/index.html:331
+msgid "Soyadınız"
+msgstr ""
+
+#: templates/index.html:333
+msgid "Soyadınızı daxil edin"
+msgstr ""
+
+#: templates/index.html:335
+msgid "Soyadınızı  düzgün qeyd edin"
+msgstr ""
+
+#: templates/index.html:339
+msgid "Soyadınızı düzgün qeyd edin"
+msgstr ""
+
+#: templates/index.html:348
+msgid "Elektron poçt ünvanınız"
+msgstr ""
+
+#: templates/index.html:350
+msgid "E-poçt ünvanınızı daxil edin"
+msgstr ""
+
+#: templates/index.html:352
+msgid "E-poçt ünvanınızı  düzgün qeyd edin"
+msgstr ""
+
+#: templates/index.html:356
+msgid "E-poçt ünvanınızı düzgün qeyd edin"
+msgstr ""
+
+#: templates/index.html:364
+msgid "Əlaqə nömrəniz"
+msgstr ""
+
+#: templates/index.html:368
+msgid "Mobil operator mütləq seçilməlidir"
+msgstr ""
+
+#: templates/index.html:378
+msgid "Nömrənizi daxil edin"
+msgstr ""
+
+#: templates/index.html:380 templates/index.html:384
+msgid "Əlaqə nömrənizi düzgün qeyd edin"
+msgstr ""
+
+#: templates/index.html:393
+msgid "Müraciətinizin tam mətni"
+msgstr ""
+
+#: templates/index.html:395
+msgid "Müraciətinizin məzmununu daxil edin"
+msgstr ""
+
+#: templates/index.html:396 templates/index.html:400
+msgid "Müraciətinizi tam şəkildə daxil edin"
+msgstr ""
+
+#: templates/index.html:411
+msgid "Davam etmək üçün təsdiqləyin"
+msgstr ""
+
+#: templates/index.html:415
+msgid "Göndər"
+msgstr "послать"
+
+#: templates/news_detail.html:88
+msgid "Ana səhifə"
+msgstr ""
+
+#~ msgid "Siyahıdan mövzu seçin"
+#~ msgstr "viberite temu"

@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<!--============================================== Header =================================================-->
+
+<header>
+    <div class="wrapper ">
+        <div class="header-wrapper ">
+            <div class="header-holder ">
+                <div class="header-right-side ">
+                    <div class="header-right-side-logo-wrapper ">
+                        <a href="{% url 'home' %}"> <img src="{% static 'front/images/bitmap@3x.png' %}"
+                                alt="gerb "></a>
+                    </div>
+                    <div class="header-right-side-name ">
+                        <a href="{% url 'home' %}">
+                            <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}<br>
+                                {% trans '“Lifttəmir” İstehsalat Birliyi' %}</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="header-navigation ">
+                    <ul>
+                        <li>
+                            <a href="{% url 'about' %}" class="nav-links">{% trans 'Haqqımızda' %}</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'home' %}#structure-section" class="nav-links">{% trans 'Struktur' %}</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'news_list' %}?page=1" class="nav-links active">{% trans 'Xəbərlər' %}</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'home' %}#contact-section" class="nav-links">{% trans 'Əlaqə' %}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header-left-side ">
+                    <div class="search-and-lang ">
+                        <div class="lang ">
+                            <div id="myDD">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {{LANGUAGE_CODE | upper}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% for language in languages %}
+                                    <li>
+                                        <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                                            class="nav-link {% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                                            lang="{{ language.code }}">
+                                            {{ language.code|upper }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="online-payment ">
+                        <a href="{% url 'home' %}#contact-section"
+                            class="online-payment-btn">{% trans 'Elektron müraciət' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--============================================== Header END=================================================-->
+
+<!--============================================== Mobile Header =================================================-->
+<section class="mobile-header">
+    <div class="m-header-wrapper">
+        <div class="m-logo-holder">
+            <div class="m-logo-holder-img ">
+                <a href="{% url 'home' %}"> <img src="{% static 'front/images/bitmap@3x.png' %}" alt="gerb "></a>
+            </div>
+            <div class="m-logo-holder-text ">
+                <a href="{% url 'home' %}">
+                    <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}<br>
+                        {% trans '“Lifttəmir” İstehsalat Birliyi' %}</p>
+                </a>
+            </div>
+        </div>
+        <div class="m-dropdown">
+            <button class="m-dropdown-btn mdi mdi-menu" onclick="mobileDropdown()"></button>
+            <button class="m-dropdown-btn mdi mdi-close m-close"></button>
+
+            <div class="m-dropdown-content" id="myDropdown">
+                <ul class="m-ul-first">
+                    <li><a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a></li>
+                    <li><a href="{% url 'home' %}#structure-section">{% trans 'Struktur' %}</a></li>
+                    <li><a href="{% url 'news_list' %}?page=1">{% trans 'Xəbərlər' %}</a></li>
+                    <li><a href="{% url 'form' %}">{% trans 'Əlaqə' %}</a></li>
+                    <li class="li-btn"><a href="{% url 'form' %}" class="m-form-btn">{% trans 'Elektron müraciət' %}</a>
+                    </li>
+                    <li>
+                        <ul class="m-ul-second">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <li>
+                                <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                                    class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                                    lang="{{ language.code }}">
+                                    {{ language.code|upper }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--============================================== Mobile Header END =================================================-->
+
+<main class="news-list">
+    <div class="wrapper">
+        <h1>{% trans 'Xəbərlər' %}</h1>
+
+        <!--============================================== NEWS CARDS=================================================-->
+
+        <div class="news-list-container">
+            {% for news in news_list %}
+            <a class="news-wrapper" href="{% url 'news_detail' news.slug %}" style="cursor: pointer;">
+                <p class="publish-time" style="color:#4c4747">{{news.published | date:'d.m.Y'}}</p>
+                <p class="news-headers" style="color:#4c4747">{{news.title}}</p>
+                <span class="mdi mdi-chevron-right"></span>
+            </a>
+            {% endfor %}
+        </div>
+
+        <!--============================================== NEWS CARDS END =================================================-->
+
+        <!--============================== pagination ===================================================-->
+        {% if len %}
+        <ul class="pagination">
+            {% if news_list.has_previous %}
+            <li><a class="mdi mdi-chevron-left" href="?page={{news_list.previous_page_number}}"></a></li>
+            {% endif %}
+            {% for page in page_range %}
+            {% if page == news.number %}
+            <li><a class="active" href="?page={{page}}">{{page}}</a></li>
+            {% else %}
+            <li><a href="?page={{page}}">{{page}}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if news_list.has_next %}
+            <li><a class="mdi mdi-chevron-right" href="?page={{news_list.next_page_number}}"></a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        <!--============================== pagination  END===================================================-->
+
+    </div>
+</main>
+
+<a href="{% url 'form' %}" id="button"><i class="mdi mdi-square-edit-outline"></i></a>
+
+<!--============================================== Footer=================================================-->
+
+<footer id="footer">
+    <div class="sites">
+        <div class="wrapper">
+            <div class="sites-wrapper">
+                <ul>
+                    {% for link in footer_links %}
+                    <li>
+                        <a href="{{link.link_url}}">{{link.link_name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-footer">
+        <div class="wrapper">
+            <div class="main-footer-1">
+                <div class="footer-logo-holder">
+                    <div class="footer-logo-wrapper ">
+                        <a href="{% url 'home' %}"><img src="{% static 'front/images/bitmap@3x.png' %}" alt="gerb "></a>
+                    </div>
+                    <div class="footer-logo-name ">
+                        <a href="{% url 'home' %}">
+                            <p>{% trans 'Bakı Şəhər İcra Hakimiyyəti' %}
+                                <br>{% trans '“Lifttəmir” İstehsalat Birliyi' %} </p>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-nav ">
+                    <div class="map-of-the-site">
+                        <ul>
+                            <li class="footer-header">{% trans 'Saytın xəritəsi' %}</li>
+                            <li>
+                                <a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'home' %}#structure-section">{% trans 'Struktur' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'news_list' %}?page=1">{% trans 'Xəbərlər' %}</a>
+                            </li>
+                            <li>
+                                <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                                <div class="footer-btn " id="hidden-link" name="{% url 'form' %}"
+                                    title="{% url 'home'%}#contact-section">
+                                    <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                                    <a href="{% url 'home'%}#contact-section" class="footer-c">{% trans 'Əlaqə' %}</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact">
+                        <ul>
+                            <li class="footer-header">{% trans 'Əlaqə nömrəsi' %}</li>
+                            <li>
+                                <a href="tel:{{contact.tel_1}}">{{contact.phone_number_1}}</a>
+                            </li>
+                            <li>
+                                <a href="tel:{{contact.tel_2}}">{{contact.phone_number_2}}</a>
+                            </li>
+                            <li class="footer-header fax-h">{% trans 'Faks' %}</li>
+                            <li><a href="fax:{{contact.fax}}">{{contact.fax_number}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="adress">
+                        <ul>
+                            <li class="footer-header">{% trans 'Ünvan' %}</li>
+                            <li>
+
+                                <a href="{{contact.address_map_link}}" target="blank">{{contact.address | safe}}</a>
+                            </li>
+                            <li class="footer-header email-h">{% trans 'Elektron ünvan' %}</li>
+                            <li>
+                                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                <div class="footer-btn " id="hidden-link" name="{% url 'form' %}"
+                    title="{% url 'home'%}#contact-section">
+                    <!--============ Change this div's name attribute to the url that we want to be shown in mobile ================-->
+                    <a href="{% url 'home' %}#contact-section"
+                        class="online-payment-btn footer-c">{% trans 'Elektron müraciət' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border"></div>
+    <div class="main-footer-2 ">
+        <div class="wrapper">
+            <p>2017-2020 © {% trans 'Bütün Hüquqlar Qorunur' %}</p>
+        </div>
+
+    </div>
+
+</footer>
+<!--============================================== Footer END=================================================-->
+
+
+{% endblock %}
